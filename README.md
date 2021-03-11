@@ -1,11 +1,3 @@
-![Protótipo dos tickets](assets/tickets.jpg)
-
-# Sobre o desafio 🚀
-
-Nesse desafio, você precisa criar 5 telas seguindo com o máximo de fidelidade o protótipo do figma (Se encontra nos links úteis) utilizando React com typescript e styled-components (você precisa instalar essa dependência).
-Você está livre para seguir com a arquitetura de código que preferir, mas lembre-se que isso também será avaliado.
-Bom desafio e bom código 😀.
-
 ## Instalação
 
 Faça o clone desse projeto.
