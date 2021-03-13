@@ -1,20 +1,65 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import storeContext from './contexts/Context'
+import {useHistory} from 'react-router-dom'
 import logo from '../assets/logo.png';
 
-const LoginPage = () =>{
+function initialState() {
+  return { user: "", password: ""};
+}
+
+function login({user, password}){
+  if(user === 'admin@admin.com' && password === 'admin'){
+    return {token: '1234'}
+  }
+  return{Error: 'Usuário ou senha inválidos!'}
+}
+
+
+const LoginPage = () => {
+
+  const [values, setValues] = useState(initialState);
+  const { setToken } = useContext(storeContext);
+  const history = useHistory();
+
+  function onChange(event) {
+    const { value, name } = event.target;
+
+    setValues({
+      ...values,
+      [name]: value
+    });
+  }
+
+  function onSubmit(event){
+
+    event.preventDefault();
+
+    const { token } = login(values);
+
+    if (token){
+      setToken(token);
+      return history.push('/')
+    } 
+
+    setValues(initialState);
+
+  }
+
   return (
-    <LoginCard>
-      <LoginLogoWrapper>
+    <PageContainer>
+      <LoginCard>
+         <LoginLogoWrapper>
         <img src={ logo } alt="logo"/>
-      </LoginLogoWrapper>
-      <Form>
-        <p>Acesse sua conta</p>
-        <input type="email" placeholder="E-mail"/>
-        <input type="password" placeholder="Senha"/>
-        <button>Entrar</button>
-      </Form>
-    </LoginCard>
+         </LoginLogoWrapper>
+         <Form onSubmit = {onSubmit} >
+          <p>Acesse sua conta</p>
+          <input type="text" name="user" placeholder="E-mail" onChange={onChange} value={values.user}/>
+          <input type="password" name="password" placeholder="Senha" onChange={onChange} value={values.password}/>
+          <button>Entrar</button>
+        </Form>
+      </LoginCard>
+    </PageContainer>
   );
 };
 
@@ -110,5 +155,14 @@ button{
 }
 
 `
+const PageContainer = styled.div`
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`
+
 
 export default LoginPage; 
