@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import logo from '../assets/logo.png'
 import gugale from '../assets/gugale.png'
 import GlobalStyle from '../styles/globalStyles'
+import { FiEdit, FiEye } from 'react-icons/fi'
+import {IconContext} from "react-icons";
 
 
 
@@ -11,8 +13,8 @@ const Home = () => {
         <>
         <PageContainer>
             <HeaderContainer>
-                <img className="logo1" src={ gugale } alt="logo-left"/>
-                <img className="logo2" src={ logo } alt="logo-right"/>
+                <img src={ gugale } alt="logo-left"/>
+                <img src={ logo } alt="logo-right"/>
             </HeaderContainer>
             <TicketsContainer>
             <TicketsTop>
@@ -24,6 +26,29 @@ const Home = () => {
                 <p>Título</p>
                 <p>Status</p>
             </TicketTitles>
+            <TicketsInfo>
+                <p className="id">#5079</p>
+                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="status">Não Iniciado</p><button><FiEdit className="icon"/></button>
+                <p className="id">#5079</p>
+                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="status">Não Iniciado</p><button><FiEdit className="icon"/></button>
+                <p className="id">#5079</p>
+                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="status">Não Iniciado</p><button><FiEdit className="icon"/></button>
+                <p className="id">#5079</p>
+                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="statusAnd">Não Iniciado</p><button><FiEdit className="icon"/></button>
+                <p className="id">#5079</p>
+                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="statusAnd">Não Iniciado</p><button><FiEdit className="icon"/></button>
+                <p className="id">#5079</p>
+                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="statusFnsh">Não Iniciado</p><button className="btnFnsh"><FiEye className="icon-fnsh"/></button>
+                <p className="id">#5079</p>
+                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className="statusFnsh">Não Iniciado</p><button className="btnFnsh"><FiEye className="icon-fnsh"/></button>
+            </TicketsInfo>
             </TicketsContainer>
         </PageContainer>
     <GlobalStyle/> 
@@ -138,6 +163,81 @@ const TicketTitles = styled.div`
         margin-left: 625px;
     }
 `
+const TicketsInfo = styled.div`
+    position: absolute;
+    width: 980px;
+    height: 60px;
+    background: #F2F2F2;
+    font-family: Roboto;
 
+    p{
+        display: inline-block;
+        color: #000000;
+    }
 
-export default Home;
+    .id{
+        margin-left: 30px;
+    }
+
+    .titles{
+        margin-left: 30px;
+    }
+
+    .status{
+        margin-left: 255px;
+        font-family: Solomon Normal;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 12px;
+        color: #FF4444;
+    }
+
+    .statusAnd{
+        margin-left: 255px;
+        font-family: Solomon Normal;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 12px;
+        color: #EDE02D;
+    }
+
+    .statusFnsh{
+        margin-left: 255px;
+        font-family: Solomon Normal;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 12px;
+        color: #00A115;    
+    }
+
+    button{
+        margin-left: 88px;
+        width: 30px;
+        height: 30px;
+        background: #33B5E5;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .icon{
+        padding-top:3px;
+        padding-left: 1px;
+        color: #FFFFFF;
+    }
+
+    .btnFnsh{
+        margin-left: 88px;
+        width: 30px;
+        height: 30px;
+        background: #00A115;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .icon-fnsh{
+        padding-top: 3px;
+        color: #FFFFFF;
+    }
+`
+
+export default Home;    
