@@ -180,6 +180,7 @@ const Anex = styled.div`
 
     .anexCloud{
         margin-top: 18px;
+        margin-left: 3px;
         height: 20px;
         width: 30px;
     }
