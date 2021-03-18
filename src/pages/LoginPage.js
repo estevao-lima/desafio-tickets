@@ -100,7 +100,7 @@ const Form = styled.form`
   width: 500px;
 
 p{
-  font-family: Solomon Normal;
+  font-family: Solomon Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -123,12 +123,22 @@ input{
     font-size: 18px;
     line-height: 22px;
     color: #000000;
+    border: none;
+    outline: none;
+}
+
+input::placeholder{
+  font-family: Solomon Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
 }
 
 button{
-  font-family: Solomon Normal;
+  font-family: Solomon Black;
   font-style: normal;
-  font-weight: 900;
   font-size: 24px;
   color: #FFFFFF;
   line-height: 29px;
@@ -139,6 +149,8 @@ button{
   left: 471px;
   top: 575px;
   margin-top: 35px;
+  border: none;
+  cursor: pointer
 }
 
 `

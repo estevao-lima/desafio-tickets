@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <Router>
         <StoreProvider>
           <Switch>
-            <Route path="/login" component={LoginPage}/>
+            <Route path="/login" component={ LoginPage }/>
             <RoutesPrivate path="/" component={ Home }/>
           </Switch>
         </StoreProvider>

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState }from 'react'
 import styled from 'styled-components'
 import logo from '../assets/logo.png'
 import gugale from '../assets/gugale.png'
+import CreateTicketModal from './CreateTicketModal.js'
 import GlobalStyle from '../styles/globalStyles'
 import { FiEdit, FiEye } from 'react-icons/fi'
 import {IconContext} from "react-icons";
@@ -9,6 +10,13 @@ import {IconContext} from "react-icons";
 
 
 const Home = () => {
+
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        setShowModal(prev => !prev)
+    }
+
     return(
         <>
         <PageContainer>
@@ -17,9 +25,10 @@ const Home = () => {
                 <img src={ logo } alt="logo-right"/>
             </HeaderContainer>
             <TicketsContainer>
+            <CreateTicketModal showModal={ showModal } setShowModal= { setShowModal }/>
             <TicketsTop>
                 <p>Seus tickets</p>
-                <button>Novo ticket</button>
+                <button onClick={openModal}>Novo ticket</button>
             </TicketsTop>
             <TicketTitles>
                 <p>ID</p>
@@ -103,7 +112,7 @@ const TicketsTop = styled.div`
         p{
         position: relative;
         display: inline-block;
-        font-family: Solomon Normal;
+        font-family: Solomon Black;
 
         top: -18px;
         left: 0px;
@@ -117,18 +126,19 @@ const TicketsTop = styled.div`
     }
 
     button{
-        display: relative;
         float: right;
-
+        cursor: pointer;
         width: 200px;
         height: 50px;
         left: 970px;
         top: 0px;
+        border: none;
+        outline: none;
 
         background: #ED1651;
         border-radius: 8px;
 
-        font-family: Solomon Normal;
+        font-family: Solomon Black;
         font-style: normal;
         font-weight: 900;
         font-size: 18px;
@@ -139,7 +149,7 @@ const TicketsTop = styled.div`
 const TicketTitles = styled.div`
     p{
         display: inline-block;
-        font-family: Roboto;
+        font-family: Roboto Black;
         font-style: normal;
         font-weight: 900;
         font-size: 18px;
@@ -168,7 +178,7 @@ const TicketsInfo = styled.div`
     width: 980px;
     height: 60px;
     background: #F2F2F2;
-    font-family: Roboto;
+    font-family: Roboto-Regular;
 
     p{
         display: inline-block;
@@ -185,7 +195,7 @@ const TicketsInfo = styled.div`
 
     .status{
         margin-left: 255px;
-        font-family: Solomon Normal;
+        font-family: Solomon Black;
         font-style: normal;
         font-weight: 900;
         line-height: 12px;
@@ -194,7 +204,7 @@ const TicketsInfo = styled.div`
 
     .statusAnd{
         margin-left: 255px;
-        font-family: Solomon Normal;
+        font-family: Solomon Black;
         font-style: normal;
         font-weight: 900;
         line-height: 12px;
@@ -203,7 +213,7 @@ const TicketsInfo = styled.div`
 
     .statusFnsh{
         margin-left: 255px;
-        font-family: Solomon Normal;
+        font-family: Solomon Black;
         font-style: normal;
         font-weight: 900;
         line-height: 12px;
@@ -217,6 +227,9 @@ const TicketsInfo = styled.div`
         background: #33B5E5;
         border-radius: 8px;
         font-size: 14px;
+        border: none;
+        cursor: pointer;
+        outline: none;
     }
 
     .icon{
@@ -232,6 +245,9 @@ const TicketsInfo = styled.div`
         background: #00A115;
         border-radius: 8px;
         font-size: 14px;
+        border: none;
+        cursor: pointer;
+        outline: none;
     }
 
     .icon-fnsh{
