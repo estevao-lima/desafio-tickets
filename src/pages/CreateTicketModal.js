@@ -260,9 +260,7 @@ const CreateTicketModal = ({showModal, setShowModal, addTicket}) => {
                             <button className="addTkt">Adicionar ticket</button>
                     </form>
                 </ModalWrapper>
-               <GlobalStyle/>
             </Background>
-            
         ): null}
     </>
     )
