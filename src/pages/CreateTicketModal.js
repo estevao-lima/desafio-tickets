@@ -232,6 +232,8 @@ const CreateTicketModal = ({showModal, setShowModal, addTicket}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         addTicket(title);
+        setTitle('');
+        setShowModal(prev => !prev);
     }
 
     return (
