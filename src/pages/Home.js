@@ -1,11 +1,13 @@
 import React, { useState }from 'react'
 import styled from 'styled-components'
+import { v4 as uuidv4 } from 'uuid'; 
 import logo from '../assets/logo.png'
 import gugale from '../assets/gugale.png'
 import CreateTicketModal from './CreateTicketModal.js'
 import GlobalStyle from '../styles/globalStyles'
 import { FiEdit, FiEye } from 'react-icons/fi'
 import {IconContext} from "react-icons";
+import EditTicketModal from './EditTicketModal';
 
 
 
@@ -13,8 +15,20 @@ const Home = () => {
 
     const [showModal, setShowModal] = useState(false);
 
+    const [appearModal, setAppearModal] = useState(false);
+
+    const unlockModal = () => {
+        setAppearModal(prev => !prev)
+    }
+
     const openModal = () => {
         setShowModal(prev => !prev)
+    }
+
+    const[tickets, setTickets] = useState([]);
+
+    const addTicket = ( title ) =>{
+        setTickets([...tickets, { id: uuidv4(), title }])
     }
 
     return(
@@ -25,7 +39,8 @@ const Home = () => {
                 <img src={ logo } alt="logo-right"/>
             </HeaderContainer>
             <TicketsContainer>
-            <CreateTicketModal showModal={ showModal } setShowModal= { setShowModal }/>
+            <CreateTicketModal showModal={ showModal } setShowModal= { setShowModal } addTicket={addTicket}/>
+            <EditTicketModal appearModal = { appearModal } setAppearModal = { setAppearModal } />
             <TicketsTop>
                 <p>Seus tickets</p>
                 <button onClick={openModal}>Novo ticket</button>
@@ -35,29 +50,15 @@ const Home = () => {
                 <p>Título</p>
                 <p>Status</p>
             </TicketTitles>
-            <TicketsInfo>
-                <p className="id">#5079</p>
-                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="status">Não Iniciado</p><button><FiEdit className="icon"/></button>
-                <p className="id">#5079</p>
-                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="status">Não Iniciado</p><button><FiEdit className="icon"/></button>
-                <p className="id">#5079</p>
-                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="status">Não Iniciado</p><button><FiEdit className="icon"/></button>
-                <p className="id">#5079</p>
-                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="statusAnd">Não Iniciado</p><button><FiEdit className="icon"/></button>
-                <p className="id">#5079</p>
-                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="statusAnd">Não Iniciado</p><button><FiEdit className="icon"/></button>
-                <p className="id">#5079</p>
-                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="statusFnsh">Não Iniciado</p><button className="btnFnsh"><FiEye className="icon-fnsh"/></button>
-                <p className="id">#5079</p>
-                <p className="titles">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="statusFnsh">Não Iniciado</p><button className="btnFnsh"><FiEye className="icon-fnsh"/></button>
-            </TicketsInfo>
+                <TicketsInfo>
+                {tickets.map(ticket =>(
+                    <li key={ticket.id}>
+                        <p className="id">#5079</p>
+                        <p className="titles">{ticket.title}</p>
+                        <p className="status">Não Iniciado<button onClick={ unlockModal }><FiEdit className="icon"/></button></p>
+                    </li>
+                    ))}
+                </TicketsInfo>
             </TicketsContainer>
         </PageContainer>
     <GlobalStyle/> 
@@ -174,15 +175,21 @@ const TicketTitles = styled.div`
     }
 `
 const TicketsInfo = styled.div`
+
     position: absolute;
     width: 980px;
     height: 60px;
-    background: #F2F2F2;
+    background: #F2F2F2;    
     font-family: Roboto-Regular;
 
     p{
         display: inline-block;
         color: #000000;
+    }
+
+    li{
+        list-style: none;
+        background: #F2F2F2;
     }
 
     .id{
@@ -191,10 +198,12 @@ const TicketsInfo = styled.div`
 
     .titles{
         margin-left: 30px;
+        display: inline-block;
+        width: 345px;
     }
 
     .status{
-        margin-left: 255px;
+        margin-left: 305px;
         font-family: Solomon Black;
         font-style: normal;
         font-weight: 900;

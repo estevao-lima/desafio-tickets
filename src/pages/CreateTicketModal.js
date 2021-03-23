@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import GlobalStyle from '../styles/globalStyles'
 import { FiX, FiUploadCloud } from 'react-icons/fi'
@@ -221,30 +221,44 @@ const Anex = styled.div`
     }
 `
 
-const CreateTicketModal = ({showModal, setShowModal}) => {
+const CreateTicketModal = ({showModal, setShowModal, addTicket}) => {
+
+    const [ title, setTitle] = useState("");
+
+    const handleName = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addTicket(title);
+    }
+
     return (
     <>
         {showModal ? (
-            <Background showModal={showModal}>
+            <Background>
                 <ModalWrapper>
                     <ModalHeader>
                         <p className="createNew" >Criar Novo Ticket</p>
                         <button className="closebtn" onClick={() => setShowModal(prev => !prev)}><FiX className="icon"></FiX></button>
                     </ModalHeader>
-                    <p className="ticketTitle">Título</p>
-                    <input type="text" name="ticketInput" placeholder="Escreva uma breve descrição sobre o problema" className="titleInput"></input>
+                    <form onSubmit={ handleSubmit }>
+                        <p className="ticketTitle">Título</p>
+                        <input type="text" value={ title } name="ticketInput" placeholder="Escreva uma breve descrição sobre o problema" required onChange={ handleName } className="titleInput"/>
 
-                    <p className="dscptTitle">Descrição</p>
-                    <textarea type="text" name="dscpInput" placeholder="Escreva detalhadamente a sua solicitação..." className="dscpInput"></textarea>
+                        <p className="dscptTitle">Descrição</p>
+                        <textarea type="text" name="dscpInput" placeholder="Escreva detalhadamente a sua solicitação..." className="dscpInput"/>
 
-                    <p className="anex">Anexos</p>
-                    <p className="anexDscp">Envie-nos arquivos, imagens ou textos que possam contribuir para a verificação da solicitação</p>
-                    <Anex>
-                        <FiUploadCloud className="anexCloud"></FiUploadCloud>
-                        <p>Arraste e solte arquivos aqui ou</p>
-                        <button>Selecione aqui</button>
-                    </Anex>
-                    <button className="addTkt">Adicionar ticket</button>
+                        <p className="anex">Anexos</p>
+                        <p className="anexDscp">Envie-nos arquivos, imagens ou textos que possam contribuir para a verificação da solicitação</p>
+                        <Anex>
+                            <FiUploadCloud className="anexCloud"></FiUploadCloud>
+                            <p>Arraste e solte arquivos aqui ou</p>
+                            <button>Selecione aqui</button>
+                        </Anex>
+                            <button className="addTkt">Adicionar ticket</button>
+                    </form>
                 </ModalWrapper>
                <GlobalStyle/>
             </Background>
