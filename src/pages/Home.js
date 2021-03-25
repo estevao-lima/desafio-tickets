@@ -8,22 +8,30 @@ import GlobalStyle from '../styles/globalStyles'
 import { FiEdit, FiEye } from 'react-icons/fi'
 import {IconContext} from "react-icons";
 import EditTicketModal from './EditTicketModal';
+import FinishedTicketModal from './FinishedTicketModal';
+import EraseTicketModal from './EraseTicketModal'
 
 
 
 const Home = () => {
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false); // Create ticket modal
 
-    const [appearModal, setAppearModal] = useState(false);
+    const [appearModal, setAppearModal] = useState(false); // Edit ticket modal
+
+    const [popUpModal, setPopUpModal] = useState(false); // Finished ticket modal
+
+    const unfoldModal = () => {
+        setPopUpModal(prev => !prev)
+    } // Finished ticket modal
 
     const unlockModal = () => {
         setAppearModal(prev => !prev)
-    }
+    } // Edit ticket modal
 
     const openModal = () => {
         setShowModal(prev => !prev)
-    }
+    } // Create ticket modal
 
     const[tickets, setTickets] = useState([]);
 
@@ -39,11 +47,12 @@ const Home = () => {
                 <img src={ logo } alt="logo-right"/>
             </HeaderContainer>
             <TicketsContainer>
-            <CreateTicketModal showModal={ showModal } setShowModal= { setShowModal } addTicket={addTicket}/>
+            <CreateTicketModal showModal={ showModal } setShowModal= { setShowModal } addTicket={ addTicket }/>
             <EditTicketModal appearModal = { appearModal } setAppearModal = { setAppearModal } />
+            <FinishedTicketModal popUpModal = { popUpModal } setPopUpModal = { setPopUpModal }/>
             <TicketsTop>
                 <p>Seus tickets</p>
-                <button onClick={openModal}>Novo ticket</button>
+                <button onClick={ openModal }>Novo ticket</button>
             </TicketsTop>
             <TicketTitles>
                 <p>ID</p>

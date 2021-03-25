@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import GlobalStyle from '../styles/globalStyles'
 import { FiTrash2, FiArrowLeft, FiUploadCloud, FiFileText, FiImage} from 'react-icons/fi'
-import EraseTicketModal from './EraseTicketModal'
 
 
 const Background = styled.div`
@@ -41,7 +40,7 @@ const TicketHeader = styled.div`
         font-size: 24px;
         line-height: 29px;
         background-color: #FFFFFF;
-        color: #FFBB33;
+        color: #00A115;
         outline: none;
         cursor: pointer;
         border: 0;
@@ -81,21 +80,23 @@ const TicketHeader = styled.div`
 
         width: 50px;
         height: 50px;
+
         font-size: 18px;
         line-height: 22px;
 
         background: #ED1651;
         border-radius: 8px;
 
-        margin-left: 50px;
+        margin-left: 342px;
 
+        
         border: none;
         cursor: pointer;
         outline: none;
     }
 
     .backIcon{
-        
+
         width: 20px;
         height: 20px;
         color: #FFFFFF;
@@ -158,6 +159,7 @@ const ModalWrapper = styled.div`
         border: none;
         outline: none;
         resize: none;
+        
     }
 
     .dscpInput::placeholder{
@@ -222,62 +224,6 @@ const ModalWrapper = styled.div`
     }
 
 `
-const Anex = styled.div`
-    margin-left: 40px;
-    margin-right: 40px; 
-    position: absolute;
-    width: 900px;
-    height: 130px;
-    background: #FFFFFF;
-    border: 1px dashed #ED1651;
-    box-sizing: border-box;
-    border-radius: 8px;
-    text-align: center;
-    box-sizing: border-box;
-
-
-    .anexCloud{
-        margin-top: 18px;
-        margin-left: 3px;
-        height: 20px;
-        width: 30px;
-    }
-
-    p{ 
-        padding-left: 375px;
-        width: 152px;
-        height: 28px;
-        font-family: Roboto Light;
-        font-style: normal;
-        font-weight: 300;
-        font-size: 12px;
-        line-height: 14px;
-        color: #000000;
-        margin: 10px 0 10px 0;
-    }
-
-    button{
-        margin-left: 7px;
-        text-align: center;
-        width: 100px;
-        height: 30px;
-
-        background: #FFFFFF;
-        border: 1px solid #ED1651;
-        box-sizing: border-box;
-        border-radius: 8px;
-        outline: none;
-
-        font-family: Roboto-Regular;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 12px;
-        line-height: 14px;
-        color: #ED1651;
-
-        cursor: pointer;
-    }
-`
 const TicketFiles = styled.div`
     position: absolute;
 
@@ -325,54 +271,36 @@ const TicketFiles = styled.div`
     }
 `
 
-const EditTicketModal = ({appearModal, setAppearModal}) => {
-
-    const [extendModal, setExtendModal] = useState(false);
-
+const FinishedTicketModal = ({ popUpModal, setPopUpModal}) => {
+    
     return (
-    <> 
-        {appearModal ? (
-                <Background>
-                        <ModalWrapper>
-                            <TicketHeader>
-                                <p className="editTitle">Editar Ticket #5079</p>
-                                <button id="statusBtn" className="statusView">Em andamento</button>
-                                <button className="excludeBtn" onClick={ () => setExtendModal(true) }>Excluir Ticket<FiTrash2 className="icon"/></button>
-                            { extendModal ? (
-                                 <EraseTicketModal onClose = {() => setExtendModal(false)}/>
-                            ) : null }
-                                <button className="extBtn" onClick={() => setAppearModal(prev => !prev)}><FiArrowLeft className="backIcon"/></button>
-                            </TicketHeader>
-                            <form>
-                                <p className="ticketTitle">Título</p>
-                                <input type="text" name="ticketInput" placeholder="Escreva uma breve descrição sobre o problema" className="titleInput"/>
-
-                                <p className="dscptTitle">Descrição</p>
-                                <textarea type="text" name="dscpInput" placeholder="Escreva detalhadamente a sua solicitação..." className="dscpInput"/>
-
-                                <p className="anex">Anexos</p>
-                                <p className="anexDscp">Envie-nos arquivos, imagens ou textos que possam contribuir para a verificação da solicitação</p>
-                            <Anex>
-                                <FiUploadCloud className="anexCloud"></FiUploadCloud>
-                                <p>Arraste e solte arquivos aqui ou</p>
-                                <button>Selecione aqui</button>
-                            </Anex>
-                                <button className="addTkt">Salvar</button>
-                            </form>
-                        </ModalWrapper>
-                        <TicketFiles>
-                            <p>Anexos</p>
-                        <ol>
-                            <li><FiFileText  className="icons"/><p className="caption">somefile.pdf</p></li>
-                            <li><FiFileText className="icons"/><p className="caption">somefile.pdf</p></li>
-                            <li><FiImage className="icons"/><p className="caption">image.jpg</p></li>
-                        </ol>
-                        </TicketFiles>
-                    <GlobalStyle/>
-                </Background>
+    <>
+        {popUpModal ? (
+            <Background>
+                    <ModalWrapper>
+                        <TicketHeader>
+                            <p className="editTitle">Editar Ticket #5079</p>
+                            <p id="statusBtn" className="statusView">Concluído</p>
+                            <button className="extBtn" onClick={() => setPopUpModal(prev => !prev)}><FiArrowLeft className="backIcon"/></button>
+                        </TicketHeader>
+                            <p className="ticketTitle">Título</p>
+                            <input type="text" name="ticketInput" placeholder="Escreva uma breve descrição sobre o problema" className="titleInput" disabled/>
+                            <p className="dscptTitle">Descrição</p>
+                            <textarea type="text" name="dscpInput" placeholder="Escreva detalhadamente a sua solicitação..." className="dscpInput" disabled/>
+                    </ModalWrapper>
+                    <TicketFiles>
+                        <p>Anexos</p>
+                    <ol>
+                        <li><FiFileText  className="icons"/><p className="caption">somefile.pdf</p></li>
+                        <li><FiFileText className="icons"/><p className="caption">somefile.pdf</p></li>
+                        <li><FiImage className="icons"/><p className="caption">image.jpg</p></li>
+                    </ol>
+                    </TicketFiles>
+                <GlobalStyle/>
+            </Background>
         ): null}
     </>
     )
 }
 
-export default EditTicketModal;
+export default FinishedTicketModal;
